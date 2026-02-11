@@ -1,0 +1,17 @@
+# Build Output
+/output/*
+!/output/.gitkeep
+
+# System Files
+.DS_Store
+Thumbs.db
+*.log
+
+# Editor Directories
+.vscode/
+.idea/
+
+# Temporary Files
+*.tmp
+*.bak
+*.swp
