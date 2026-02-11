@@ -22,26 +22,40 @@ param (
     [string]$Name,
 
     [Parameter(Mandatory = $false)]
-    [ValidateSet("articles", "documents")]
+    # [ValidateSet("articles", "documents")] # Removed to allow subdirectories
     [string]$Collection = "articles"
 )
 
 $Root = Split-Path $PSScriptRoot -Parent
-$SourcePath = Join-Path $Root "$Collection\$Name"
+$TargetBase = Join-Path $Root "$Collection\$Name"
 $OutputPath = Join-Path $Root "output\$Collection"
 $TemplatePath = Join-Path $Root "templates\editorial.tex"
 $AssetsPath = Join-Path $Root "assets"
 
-if (-not (Test-Path $SourcePath)) {
-    Write-Error "The $Collection '$Name' does not exist in '$SourcePath'."
+# Logic to determine input file
+if (Test-Path -Path $TargetBase -PathType Container) {
+    # It is a directory, look for index.md
+    $InputFile = Join-Path $TargetBase "index.md"
+    $ResourcePath = $TargetBase
+    if (-not (Test-Path $InputFile)) {
+         Write-Error "Directory found at '$TargetBase', but 'index.md' is missing."
+         exit 1
+    }
+}
+elseif (Test-Path -Path "$TargetBase.md" -PathType Leaf) {
+    # It is a standalone markdown file
+    $InputFile = "$TargetBase.md"
+    $ResourcePath = Split-Path $InputFile -Parent
+}
+else {
+    Write-Error "Could not find article or document '$Name' in '$Collection'. Checked '$TargetBase' (dir) and '$TargetBase.md' (file)."
     exit 1
 }
 
 if (-not (Test-Path $OutputPath)) {
-    New-Item -ItemType Directory -Path $OutputPath | Out-Null
+    New-Item -ItemType Directory -Path $OutputPath -Force | Out-Null
 }
 
-$InputFile = Join-Path $SourcePath "index.md"
 $OutputFile = Join-Path $OutputPath "$Name.pdf"
 
 Write-Host "Compiling '$Name' from $Collection..." -ForegroundColor Cyan
@@ -57,7 +71,7 @@ $PandocArgs = @(
     "-o", "$OutputFile",
     "--from", "markdown+emoji",
     "--template", "$TemplatePath",
-    "--resource-path", "$SourcePath;$AssetsPath",
+    "--resource-path", "$ResourcePath;$AssetsPath",
     "--syntax-highlighting", "kate", # Using a standard style instead of pygments/idiomatic to be safe, or just follow recommendation? 
     # The warning said Use --syntax-highlighting=idiomatic instead of --listings.
     # So I will use that.

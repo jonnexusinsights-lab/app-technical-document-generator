@@ -34,11 +34,14 @@ Open `articles/my-first-article/index.md` in your text editor.
 Run the build script with the folder name (slug):
 
 ```powershell
-# For Articles
+# Build an Article (default)
 ./scripts/build.ps1 -Name "my-first-article"
 
-# For Documents (if you created one)
+# Build a Document (if you created one)
 ./scripts/build.ps1 -Name "my-document" -Collection "documents"
+
+# Build from a nested folder
+./scripts/build.ps1 -Name "my-tech-doc" -Collection "documents/technical"
 ```
 
 *   **First Run**: MiKTeX and Pandoc may ask to install packages. Allow it.

@@ -39,11 +39,17 @@ Edit the `.md` file. Use standard Markdown.
 To generate the final PDF with professional styles:
 
 ```powershell
-# Build an Article (default)
+# Build an Article (default structure: /articles/slug/index.md)
 ./scripts/build.ps1 -Name "my-new-article"
 
-# Build a Document
+# Build a Document from a specific collection
 ./scripts/build.ps1 -Name "my-new-document" -Collection "documents"
+
+# Build from a nested collection
+./scripts/build.ps1 -Name "my-doc" -Collection "documents/technical-framework"
+
+# Build a standalone markdown file (e.g., documents/notes.md)
+./scripts/build.ps1 -Name "notes" -Collection "documents"
 ```
 
 The resulting PDF will be in `output/articles/` or `output/documents/`.
@@ -59,4 +65,6 @@ The resulting PDF will be in `output/articles/` or `output/documents/`.
 ### Conventions
 
 - **Folders**: `kebab-case` (lowercase, hyphen-separated).
-- **Files**: The main file of each article must be named `index.md`.
+- **Files**:
+    - **Articles**: Should ideally use `index.md` within a folder for better asset management.
+    - **Documents**: Can be standalone `.md` files or `index.md` in a folder.
