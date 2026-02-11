@@ -50,7 +50,6 @@ To make informed decisions about AI, a manager must understand how data is "weig
 
  | Evaluates if a problem requires AI or if it is solvable via rule-based engineering. Validates if the AI solution is technically and financially viable compared to statistical methods.
 
- |
 | **Advanced / Expert** | Technical criteria to choose between RAG (context) and Fine-Tuning (specialization). Designs multimodal Generative AI systems and hyperparameter optimization.
 
  | Implements agentic architectures and model quantization to optimize systems. Lead the full MLOps stack. Optimizes "Cold Start" and agent scalability.
