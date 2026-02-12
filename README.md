@@ -28,11 +28,14 @@ Run the helper script or create the folder manually:
 # For Articles
 ./scripts/new-article.ps1 -Title "My New Article"
 
-# For Documents
+# For Documents (Default: documents/)
 ./scripts/new-document.ps1 -Title "My New Document"
+
+# For Documents in a Collection
+./scripts/new-document.ps1 -Title "Architecture Spec" -Collection "documents/technical-specs"
 ```
 
-This will generate a folder in `articles/` or `documents/` with the required frontmatter.
+This will generate a folder in the specified collection (or `articles/` by default) with the required frontmatter.
 
 ### 2. Write Content
 

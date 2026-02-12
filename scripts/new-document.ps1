@@ -8,7 +8,9 @@
 
 param (
     [Parameter(Mandatory = $true)]
-    [string]$Title
+    [string]$Title,
+
+    [string]$Collection = "documents"
 )
 
 function Get-KebabCase {
@@ -19,7 +21,7 @@ function Get-KebabCase {
 
 $Root = Split-Path $PSScriptRoot -Parent
 $Slug = Get-KebabCase $Title
-$DocDir = Join-Path $Root "documents\$Slug"
+$DocDir = Join-Path $Root "$Collection\$Slug"
 
 if (Test-Path $DocDir) {
     Write-Error "The document '$Slug' already exists."
