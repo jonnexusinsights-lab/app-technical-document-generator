@@ -2,6 +2,13 @@
 
 This repository manages professional technical articles using a **Docs-as-Code** methodology. Articles are written in Markdown and automatically compiled into editorial-quality PDFs.
 
+## Framework & Methodologies
+
+This project adheres to the **ACE Framework (AI-assisted Code Engineering)**:
+
+- **Repository**: [ACE Framework](https://github.com/jonnabio/ace-framework)
+- **Specification**: [ACE-SPEC.md](ACE-SPEC.md)
+
 ## Project Structure
 
 - **/articles**: Source code for articles. Each article lives in its own folder (e.g., `articles/my-article/index.md`).
@@ -30,6 +37,7 @@ This will generate a folder in `articles/` or `documents/` with the required fro
 ### 2. Write Content
 
 Edit the `.md` file. Use standard Markdown.
+
 - **Code**: Use code blocks with specified language (e.g., \`\`\`python).
 - **Math**: Use LaTeX syntax between dollar signs `$E=mc^2$`.
 - **Images**: Reference relative images `![Alt](image.png)` or from assets `![Alt](../../assets/diagram.png)`.
@@ -66,5 +74,5 @@ The resulting PDF will be in `output/articles/` or `output/documents/`.
 
 - **Folders**: `kebab-case` (lowercase, hyphen-separated).
 - **Files**:
-    - **Articles**: Should ideally use `index.md` within a folder for better asset management.
-    - **Documents**: Can be standalone `.md` files or `index.md` in a folder.
+  - **Articles**: Should ideally use `index.md` within a folder for better asset management.
+  - **Documents**: Can be standalone `.md` files or `index.md` in a folder.
